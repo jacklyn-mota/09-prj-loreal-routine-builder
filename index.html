@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -16,6 +16,8 @@
   </head>
 
   <body>
+    <div class="toast-container" aria-live="polite" aria-atomic="true"></div>
+
     <div class="page-wrapper">
       <!------- Header / Branding ------->
       <header class="site-header">
@@ -25,10 +27,18 @@
 
       <!-- Category Filter -->
       <div class="search-section">
+        <input
+          id="productSearch"
+          type="search"
+          placeholder="Search by name, description, or category"
+          autocomplete="off"
+          aria-label="Search products"
+        />
         <select id="categoryFilter">
           <option value="" disabled selected>Choose a Category</option>
           <option value="cleanser">Cleansers</option>
           <option value="moisturizer">Moisturizers & Treatments</option>
+          <option value="skincare">Skincare (Serums & Treatments)</option>
           <option value="haircare">Haircare</option>
           <option value="makeup">Makeup</option>
           <option value="hair color">Hair Color</option>
@@ -46,6 +56,14 @@
       <div class="selected-products">
         <h2>Selected Products</h2>
         <div id="selectedProductsList"></div>
+        <button
+          type="button"
+          id="clearSelectedProducts"
+          class="clear-btn"
+          hidden
+        >
+          Clear All
+        </button>
         <button id="generateRoutine" class="generate-btn">
           <i class="fa-solid fa-wand-magic-sparkles"></i> Generate Routine
         </button>
@@ -85,8 +103,24 @@
       </footer>
     </div>
 
-    <!-- secrets.js can be removed when using Cloudflare Workers for API requests -->
-    <script src="secrets.js"></script>
+    <div class="modal-overlay" aria-hidden="true">
+      <div
+        class="product-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="productModalTitle"
+      >
+        <button
+          class="modal-close"
+          type="button"
+          aria-label="Close product details"
+        >
+          &times;
+        </button>
+        <div class="modal-content"></div>
+      </div>
+    </div>
+
     <script src="script.js"></script>
   </body>
 </html>
